@@ -1,0 +1,79 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f0f0f0;
+}
+
+/* MAIN  */
+.main-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;  
+    grid-template-rows: 100px 250px 120px;  
+    gap: 15px;  
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #34495e; 
+    border-radius: 15px;
+}
+
+/* All grids */
+.grid-item {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* HEADER  css */
+.header {
+    background-color: #e74c3c;  /* Red */
+    grid-column: 1 / 3;  /* Span from column 1 to 3 */
+}
+
+/* SIDEBAR css */
+.sidebar {
+    background-color: #f39c12;  /* Orange */
+}
+
+/* MAIN CONTENT css */
+.main-content {
+    background-color: #27ae60;  /* Green */
+}
+
+/* NESTED GRID css */
+.nested-section {
+    background-color: #16a085;  
+    grid-column: 1 / 3; 
+    padding: 15px;
+    
+    /* Also having another grid */
+    display: grid;
+    grid-template-columns: 1fr 1fr;   
+    gap: 15px;  
+}
+
+/* Styling for the nested grids */
+.nested-item {
+    background-color: #1abc9c;  /* Lighter teal */
+    color: white;
+    padding: 30px;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Different colors for each card */
+.nested-item:nth-child(1) { 
+    background-color: #48c9b0; 
+}
+
+.nested-item:nth-child(2) { 
+    background-color: #5dade2; 
+}
