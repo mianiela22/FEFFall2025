@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Competition Academy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Nav portion -->
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#madlibs">Mad Libs</a>
+        <a href="#competition">Competitions</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About</a>
+    </nav>
+
+    <div class="container">
+        <h1>🎪 Ultimate Competition Academy 🏆</h1> <!-- Main title portion-->
+        
+        <!-- welcome portion -->
+        <section id="home" class="story-card">
+            <h2>Welcome to the Wackiest Training Center on Earth!</h2>
+            <p>You've stumbled into the <span class="highlight-text">Ultimate Competition Academy</span>, where people train for the most ridiculous competitions imaginable! From sky diving instruction contests to game show hosting battles, we've got it all!</p>
+            <p>Will you create your own silly story with Mad Libs, or will you choose your path to becoming a champion of something completely absurd? Let the chaos begin!</p>
+        </section>
+
+        <!-- IE - part 1 - Goofynes points () -->
+        <section class="progress-counter">
+            <h3>🤪 Your Goofiness Level</h3>
+            <div class="counter-display" id="scoreDisplay">0</div>
+            <p>The goofier you are, the better your chances!</p>
+            <div class="counter-buttons">
+                <button onclick="incrementScore()">Epic Win (+10)</button>
+                <button onclick="decrementScore()">Minor Fail (-5)</button>
+                <button onclick="resetScore()">Start Over</button>
+            </div>
+        </section>
+
+        <!-- Mad Libs Section -->
+        <section id="madlibs" class="story-card">
+            <h2>🎭 Mad Libs: <span class="highlight-text">My First Day of Training</span></h2>
+            <p>Fill in the blanks to create the silliest training story ever!</p>
+            
+            <form class="madlibs-form" id="madlibsForm">
+                <div class="form-group">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="adjective1">Adjective (silly word):</label>
+                    <input type="text" id="adjective1" placeholder="wobbly, squishy, explosive..." required>
+                </div>
+                <div class="form-group">
+                    <label for="noun1">Noun (random object):</label>
+                    <input type="text" id="noun1" placeholder="banana, tuba, spatula..." required>
+                </div>
+                <div class="form-group">
+                    <label for="verb1">Verb ending in -ing:</label>
+                    <input type="text" id="verb1" placeholder="yodeling, juggling, sneezing..." required>
+                </div>
+                <div class="form-group">
+                    <label for="adjective2">Adjective (weird feeling):</label>
+                    <input type="text" id="adjective2" placeholder="dizzy, confused, confident..." required>
+                </div>
+                <div class="form-group">
+                    <label for="animal">Animal:</label>
+                    <input type="text" id="animal" placeholder="llama, penguin, ostrich..." required>
+                </div>
+                <div class="form-group">
+                    <label for="food">Food:</label>
+                    <input type="text" id="food" placeholder="spaghetti, pickles, cheese..." required>
+                </div>
+                <button type="submit">🎪 Create My Ridiculous Story 🎪</button>
+            </form>
+
+            <!-- part to hold the madlips when made -->
+            <div class="story-display hidden" id="madlibsResult"></div>
+        </section>
+
+        <!-- IE - part 2 tab story choosing) -->
+        <section id="competition" class="story-card tabs">
+            <h2>🏆 Choose Your Competition Path</h2>
+            <p>Pick which ridiculous competition you want to train for. Your choices will determine your fate!</p>
+            
+            <!-- buttons -->
+            <div class="tab-buttons">
+                <button class="tab-button active" onclick="openTab(event, 'comp1')">🪂 Sky Diving Instructor</button>
+                <button class="tab-button" onclick="openTab(event, 'comp2')">🎤 Game Show Host</button>
+                <button class="tab-button" onclick="openTab(event, 'comp3')">🍕 Competitive Eater</button>
+                <button class="tab-button" onclick="openTab(event, 'comp4')">🎪 Circus Performer</button>
+            </div>
+
+            <!-- STORY 1 - SKYDIVING -->
+            <div id="comp1" class="tab-content active">
+                <div class="story-display">
+                    <h3>🪂 Sky Diving Instructor Championship</h3>
+                    <p>You're training to become the world's BEST sky diving instructor! But first, you need to pass the qualification test. You're standing at the edge of the plane, 10,000 feet in the air, and your instructor yells, "REMEMBER YOUR TRAINING!"</p>
+                    <p><strong>What do you do first?</strong></p>
+                </div>
+                
+                <!-- Gridded Section 2: Choice Buttons Grid -->
+                <div class="choices-grid">
+                    <button class="choice-button" onclick="showStoryResult('sky1')">🦅 Do a Majestic Eagle Pose</button>
+                    <button class="choice-button" onclick="showStoryResult('sky2')">📱 Take a Selfie First</button>
+                    <button class="choice-button" onclick="showStoryResult('sky3')">🎤 Yell a Movie Quote</button>
+                </div>
+                
+                <!-- Story Results (hidden until clicked) -->
+                <div class="story-display hidden" id="sky1">
+                    <h3>LEGENDARY! 🦅</h3>
+                    <p>Your eagle pose is SO majestic that photographers on the ground capture it! The photo goes viral and you become known as "The Eagle Master." You pass with flying colors (literally) and become the most sought-after sky diving instructor in the world!</p>
+                </div>
+                <div class="story-display hidden" id="sky2">
+                    <h3>INTERNET FAMOUS! 📱</h3>
+                    <p>Your mid-air selfie gets 10 million likes! Sure, you forgot to pull your parachute for a few extra seconds, but the dramatic footage makes you an internet sensation. You're hired to teach celebrity sky diving classes!</p>
+                </div>
+                <div class="story-display hidden" id="sky3">
+                    <h3>MEME WORTHY! 🎬</h3>
+                    <p>You scream "I'M THE KING OF THE WORLD!" but the wind makes your voice crack hilariously. The video becomes a meme, but hey, you still land safely! You're hired as a sky diving instructor for movie stunt teams!</p>
+                </div>
+            </div>
+
+            <!--  STORY 2 - game show  -->
+            <div id="comp2" class="tab-content">
+                <div class="story-display">
+                    <h3>🎤 Game Show Host Battle Royale</h3>
+                    <p>You're competing to host the next big game show! You're in the middle of your audition when the teleprompter breaks. The judges are staring at you. The audience is waiting. You have 5 seconds to improvise!</p>
+                    <p><strong>What do you say?</strong></p>
+                </div>
+                <div class="choices-grid">
+                    <button class="choice-button" onclick="showStoryResult('game1')">🎉 Make Up a Ridiculous Game</button>
+                    <button class="choice-button" onclick="showStoryResult('game2')">🤷 Just Start Dancing</button>
+                    <button class="choice-button" onclick="showStoryResult('game3')">📢 Ask the Audience for Help</button>
+                </div>
+                <div class="story-display hidden" id="game1">
+                    <h3>GENIUS IMPROVISATION! 🧠</h3>
+                    <p>You invent "Backwards Spelling Bee While Hopping" on the spot! The judges are so impressed by your creativity that they give you your own show. It becomes a hit and runs for 10 seasons!</p>
+                </div>
+                <div class="story-display hidden" id="game2">
+                    <h3>VIRAL SENSATION! 💃</h3>
+                    <p>Your spontaneous dance moves are so ridiculous that everyone joins in! The audition turns into a dance party. You're hired to host a new show called "Dance or Consequence!" It's a huge success!</p>
+                </div>
+                <div class="story-display hidden" id="game3">
+                    <h3>CROWD FAVORITE! 👥</h3>
+                    <p>You turn the audition into an interactive experience! The audience loves being involved, and the judges realize you have a natural talent for engaging people. You're given a late-night game show slot!</p>
+                </div>
+            </div>
+
+            <!-- STORY 3 - eating competition -->
+            <div id="comp3" class="tab-content">
+                <div class="story-display">
+                    <h3>🍕 Extreme Competitive Eating Championship</h3>
+                    <p>You're training for the International Food Eating Competition! Today's challenge: eat as many hot dogs as possible in 10 minutes. But plot twist - they're MEGA HOT DOGS (3 feet long each). You grab your first one and...</p>
+                    <p><strong>What's your strategy?</strong></p>
+                </div>
+                <div class="choices-grid">
+                    <button class="choice-button" onclick="showStoryResult('eat1')">🌀 Spin It Like Spaghetti</button>
+                    <button class="choice-button" onclick="showStoryResult('eat2')">✂️ Cut It Into Tiny Pieces</button>
+                    <button class="choice-button" onclick="showStoryResult('eat3')">🎯 Just Go For It</button>
+                </div>
+                <div class="story-display hidden" id="eat1">
+                    <h3>REVOLUTIONARY TECHNIQUE! 🌀</h3>
+                    <p>You invent the "Tornado Method" of hot dog eating! By spinning the hot dog, you create a hypnotic effect that makes the judges forget to count. You're disqualified BUT you become famous for creating a new eating style!</p>
+                </div>
+                <div class="story-display hidden" id="eat2">
+                    <h3>TACTICAL GENIUS! ✂️</h3>
+                    <p>Your "divide and conquer" strategy works! You finish more hot dogs than anyone expected. You place 3rd but get hired as a competitive eating coach. Your students dominate the circuit!</p>
+                </div>
+                <div class="story-display hidden" id="eat3">
+                    <h3>ABSOLUTE LEGEND! 🏆</h3>
+                    <p>You unhinge your jaw like a snake and just GO FOR IT! You don't win, but your fearless determination earns you a sponsorship deal with a hot dog company. You're their new mascot: "The Hot Dog Hero!"</p>
+                </div>
+            </div>
+
+            <!-- Tab Content: Circus Performer Competition -->
+            <div id="comp4" class="tab-content">
+                <div class="story-display">
+                    <h3>🎪 Circus Performer Tryouts</h3>
+                    <p>The circus is looking for their next star! You have to impress the ringmaster with your special talent. You step into the spotlight, the crowd goes silent, and the ringmaster shouts, "SHOW US WHAT YOU'VE GOT!"</p>
+                    <p><strong>What's your act?</strong></p>
+                </div>
+                <div class="choices-grid">
+                    <button class="choice-button" onclick="showStoryResult('circus1')">🤹 Juggle Random Objects</button>
+                    <button class="choice-button" onclick="showStoryResult('circus2')">🎭 Do Impressions</button>
+                    <button class="choice-button" onclick="showStoryResult('circus3')">🤸 Attempt a Backflip</button>
+                </div>
+                <div class="story-display hidden" id="circus1">
+                    <h3>MASTER JUGGLER! 🤹</h3>
+                    <p>You start juggling your shoes, someone's phone, and a hot dog from the audience! It's chaos but it's AMAZING chaos! The crowd goes wild and you're hired as the opening act. Your signature move: juggling increasingly weird items!</p>
+                </div>
+                <div class="story-display hidden" id="circus2">
+                    <h3>COMEDY GOLD! 😂</h3>
+                    <p>Your impressions of famous people and animals are hilariously bad, but that's what makes them PERFECT! You become the circus's comedy act and tour the world making people laugh with your terrible impressions!</p>
+                </div>
+                <div class="story-display hidden" id="circus3">
+                    <h3>UNEXPECTED HERO! 🦸</h3>
+                    <p>You attempt a backflip but accidentally launch yourself into the cotton candy machine. You emerge covered in pink fluff, looking like a cotton candy monster! The kids LOVE it. You're hired as the "Cotton Candy Creature" character!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gridded Section #1: Image Gallery (5+ images required) -->
+        <section id="gallery" class="story-card">
+            <h2>📸 Gallery of <span class="highlight-text">Epic Training Moments</span></h2>
+            <p>Check out these legendary moments from past competitors!</p>
+            
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1656271039572-16057ca1644c?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sky Diving">
+                    <div class="gallery-label">🪂 Sky Diving Training</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&q=80" alt="Game Show">
+                    <div class="gallery-label">🎤 Game Show Studio</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=80" alt="Food Competition">
+                    <div class="gallery-label">🍔 Eating Competition</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?w=800&q=80" alt="Circus">
+                    <div class="gallery-label">🎪 Circus Training</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&q=80" alt="Trophy">
+                    <div class="gallery-label">🏆 Champion's Trophy</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1485518882345-15568b007407?w=800&q=80" alt="Training Arena">
+                    <div class="gallery-label">🎯 Training Arena</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Element #3: Theme Changer -->
+        <section class="story-card">
+            <h2>🎨 Change Your <span class="highlight-text">Training Environment</span></h2>
+            <p>Switch up the vibes to match your competition mood!</p>
+            <div class="choices-grid">
+                <button class="choice-button" onclick="changeTheme('extreme')">🔥 Extreme Mode</button>
+                <button class="choice-button" onclick="changeTheme('party')">🎉 Party Mode</button>
+                <button class="choice-button" onclick="changeTheme('champion')">🏆 Champion Mode</button>
+                <button class="choice-button" onclick="changeTheme('default')">🔄 Reset Theme</button>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="story-card">
+            <h2>About the <span class="highlight-text">Competition Academy</span></h2>
+            <p>Welcome to the most ridiculous training center in existence! Here, we believe that the sillier you are, the better your chances of success. Our motto: "If you're not laughing, you're not learning!"</p>
+            <p><strong>What We Offer:</strong></p>
+            <ul>
+                <li>🎭 Hilarious Mad Libs story generator</li>
+                <li>🏆 Multiple ridiculous competition paths</li>
+                <li>🤪 Goofiness level tracking</li>
+                <li>🎨 Customizable training environments</li>
+                <li>😂 100% guaranteed to make you laugh!</li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Link to JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
