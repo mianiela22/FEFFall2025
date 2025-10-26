@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Virtual Pet 🐾</title>
+    
+    <!-- UIKit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
+    
+    <style>
+        /* CUTE PASTEL THEME! */
+        body {
+            background: linear-gradient(135deg, #ffd1dc 0%, #e0c3fc 50%, #d4f1f4 100%);
+            min-height: 100vh;
+            padding: 20px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        
+        .pet-display {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 8px 32px rgba(255, 182, 193, 0.3);
+            border: 3px solid #ffb6c1;
+        }
+        
+        .pet-emoji {
+            font-size: 150px;
+            animation: bounce 2s infinite;
+            filter: drop-shadow(0 5px 15px rgba(255, 182, 193, 0.4));
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+        
+        .stat-container {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffeef8 100%);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid #ffc0cb;
+        }
+        
+        .stat-bar {
+            background: #ffe4e9;
+            height: 25px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 10px 0;
+            border: 2px solid #ffb6c1;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .stat-fill {
+            height: 100%;
+            transition: width 0.5s ease;
+            border-radius: 15px;
+        }
+        
+        .happiness-fill {
+            background: linear-gradient(90deg, #ff9a9e 0%, #fecfef 100%);
+        }
+        
+        .hunger-fill {
+            background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%);
+        }
+        
+        .energy-fill {
+            background: linear-gradient(90deg, #84fab0 0%, #8fd3f4 100%);
+        }
+        
+        /* Cute navbar */
+        .uk-navbar-container {
+            background: rgba(255, 255, 255, 0.9) !important;
+            border-radius: 20px !important;
+            border: 3px solid #ffb6c1;
+            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.3);
+        }
+        
+        .uk-navbar-nav > li > a {
+            color: #ff69b4 !important;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        /* Cute cards */
+        .uk-card {
+            border-radius: 25px !important;
+            border: 3px solid #ffb6c1;
+            box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3);
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #fff 0%, #fff5f7 100%);
+        }
+        
+        .uk-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(255, 105, 180, 0.4);
+        }
+        
+        .uk-button-primary {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%) !important;
+            border: none !important;
+            border-radius: 20px !important;
+            font-weight: bold;
+            padding: 10px 25px;
+            box-shadow: 0 4px 15px rgba(255, 154, 158, 0.3);
+        }
+        
+        .uk-button-primary:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.5);
+        }
+        
+        /* Modal styling */
+        .uk-modal-dialog {
+            border-radius: 30px !important;
+            border: 3px solid #ffb6c1;
+        }
+        
+        .uk-modal-body {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffeef8 100%);
+        }
+        
+        /* Accordion */
+        .uk-accordion-title {
+            background: linear-gradient(135deg, #ffd1dc 0%, #e0c3fc 100%);
+            padding: 15px;
+            border-radius: 15px;
+            margin: 5px 0;
+            font-weight: bold;
+            color: #ff1493 !important;
+        }
+        
+        h1, h2, h3 {
+            color: #ff69b4;
+            text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.3);
+        }
+        
+        .pet-name {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ff1493;
+            text-shadow: 3px 3px 6px rgba(255, 105, 180, 0.3);
+        }
+        
+        .sparkle {
+            animation: sparkle 1.5s infinite;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="uk-container">
+        
+        
+        <!-- ========================================== -->
+        <!-- UIKIT COMPONENT #1: NAVBAR -->
+        <!-- ========================================== -->
+        <nav class="uk-navbar-container" uk-navbar>
+            <div class="uk-navbar-center">
+                <ul class="uk-navbar-nav">
+                    <li class="uk-active"><a href="#">🏠 Home</a></li>
+                    <li><a href="#">🎮 Play</a></li>
+                    <li><a href="#">🍕 Feed</a></li>
+                    <li><a href="#">😴 Sleep</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- END UIKIT COMPONENT #1 -->
+        
+        
+        
+        <div class="pet-display uk-margin-top">
+            <div class="pet-name">✨ Buddy ✨</div>
+            <div class="pet-emoji" id="petEmoji">🐕</div>
+            <p class="uk-text-lead" style="color: #ff69b4;">Your adorable virtual bestie! 💕</p>
+            
+            <div class="stat-container">
+                <p style="font-size: 18px; margin: 10px 0;"><strong>💖 Happiness: <span id="happinessValue">75</span>%</strong></p>
+                <div class="stat-bar">
+                    <div class="stat-fill happiness-fill" id="happinessBar" style="width: 75%;"></div>
+                </div>
+                
+                <p style="font-size: 18px; margin: 10px 0;"><strong>🍔 Hunger: <span id="hungerValue">60</span>%</strong></p>
+                <div class="stat-bar">
+                    <div class="stat-fill hunger-fill" id="hungerBar" style="width: 60%;"></div>
+                </div>
+                
+                <p style="font-size: 18px; margin: 10px 0;"><strong>⚡ Energy: <span id="energyValue">40</span>%</strong></p>
+                <div class="stat-bar">
+                    <div class="stat-fill energy-fill" id="energyBar" style="width: 40%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <!-- ========================================== -->
+        <!-- UIKIT COMPONENT #2: CARDS IN GRID -->
+        <!-- ========================================== -->
+        <h2 class="uk-text-center uk-margin-top">🌸 Pet Actions 🌸</h2>
+        
+        <div class="uk-grid-match uk-child-width-1-4@m uk-child-width-1-2@s uk-text-center" uk-grid>
+            
+            <!-- Card 1: Feed -->
+            <div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <div style="font-size: 50px;" class="sparkle">🍕</div>
+                    <h3 class="uk-card-title">Feed</h3>
+                    <p>Yummy nom noms!</p>
+                    <button class="uk-button uk-button-primary" onclick="feedPet()">Feed 🍕</button>
+                </div>
+            </div>
+            
+            <!-- Card 2: Play -->
+            <div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <div style="font-size: 50px;" class="sparkle">⚽</div>
+                    <h3 class="uk-card-title">Play</h3>
+                    <p>Let's have fun!</p>
+                    <button class="uk-button uk-button-primary" onclick="playWithPet()">Play ⚽</button>
+                </div>
+            </div>
+            
+            <!-- Card 3: Sleep -->
+            <div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <div style="font-size: 50px;" class="sparkle">😴</div>
+                    <h3 class="uk-card-title">Sleep</h3>
+                    <p>Sweet dreams!</p>
+                    <button class="uk-button uk-button-primary" onclick="petSleep()">Sleep 😴</button>
+                </div>
+            </div>
+            
+            <!-- Card 4: Bath -->
+            <div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <div style="font-size: 50px;" class="sparkle">🛁</div>
+                    <h3 class="uk-card-title">Bath</h3>
+                    <p>Splish splash!</p>
+                    <button class="uk-button uk-button-primary" onclick="bathPet()">Bath 🛁</button>
+                </div>
+            </div>
+        </div>
+        <!-- END UIKIT COMPONENT #2 -->
+        
+        
+        <!-- ========================================== -->
+        <!-- UIKIT COMPONENT #3: MODALS -->
+        <!-- ========================================== -->
+        
+        <!-- Feed Modal -->
+        <div id="feed-modal" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body">
+                <h2 class="uk-modal-title">🍕 Feeding Time!</h2>
+                <div style="font-size: 100px;">😋</div>
+                <p style="font-size: 18px; color: #ff69b4;"><strong>Nom nom nom! Buddy LOVES the food!</strong></p>
+                <p>✨ Hunger -30% | Happiness +15% ✨</p>
+                <p class="uk-text-right">
+                    <button class="uk-button uk-button-primary uk-modal-close" type="button">Yay! 💕</button>
+                </p>
+            </div>
+        </div>
+        
+        <!-- Play Modal -->
+        <div id="play-modal" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body">
+                <h2 class="uk-modal-title">⚽ Playtime!</h2>
+                <div style="font-size: 100px;">🎾</div>
+                <p style="font-size: 18px; color: #ff69b4;"><strong>Wheee! That was SO much fun!</strong></p>
+                <p>✨ Happiness +25% | Energy -20% ✨</p>
+                <p class="uk-text-right">
+                    <button class="uk-button uk-button-primary uk-modal-close" type="button">Yay! 💕</button>
+                </p>
+            </div>
+        </div>
+        
+        <!-- Sleep Modal -->
+        <div id="sleep-modal" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body">
+                <h2 class="uk-modal-title">😴 Nap Time!</h2>
+                <div style="font-size: 100px;">💤</div>
+                <p style="font-size: 18px; color: #ff69b4;"><strong>Zzz... Sweet dreams little buddy!</strong></p>
+                <p>✨ Energy +40% | Hunger +10% ✨</p>
+                <p class="uk-text-right">
+                    <button class="uk-button uk-button-primary uk-modal-close" type="button">Yay! 💕</button>
+                </p>
+            </div>
+        </div>
+        
+        <!-- Bath Modal -->
+        <div id="bath-modal" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body">
+                <h2 class="uk-modal-title">🛁 Bath Time!</h2>
+                <div style="font-size: 100px;">🧼</div>
+                <p style="font-size: 18px; color: #ff69b4;"><strong>Splish splash! So clean and fresh!</strong></p>
+                <p>✨ Happiness +20% ✨</p>
+                <p class="uk-text-right">
+                    <button class="uk-button uk-button-primary uk-modal-close" type="button">Yay! 💕</button>
+                </p>
+            </div>
+        </div>
+        <!-- END UIKIT COMPONENT #3 -->
+        
+        
+        <!-- ========================================== -->
+        <!-- UIKIT COMPONENT #4: ACCORDION -->
+        <!-- ========================================== -->
+        <div class="uk-section uk-section-default uk-margin-top" style="border-radius: 30px; border: 3px solid #ffb6c1;">
+            <div class="uk-container">
+                <h2 class="uk-text-center">📖 Pet Care Guide 🌸</h2>
+                
+                <ul uk-accordion>
+                    
+                    <li class="uk-open">
+                        <a class="uk-accordion-title" href="#">🍕 Feeding Your Pet</a>
+                        <div class="uk-accordion-content">
+                            <p>Feed Buddy when hunger is high! Each feeding decreases hunger by 30% and increases happiness by 15%. Buddy loves all kinds of yummy treats! 💕</p>
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <a class="uk-accordion-title" href="#">⚽ Playing Together</a>
+                        <div class="uk-accordion-content">
+                            <p>Playing increases happiness by 25% but uses 20% energy. Make sure Buddy isn't too tired before playing! Favorite games: fetch, tug-of-war, and hide & seek! 🎾</p>
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <a class="uk-accordion-title" href="#">😴 Sleep & Rest</a>
+                        <div class="uk-accordion-content">
+                            <p>Sleep restores 40% energy but increases hunger by 10%. A well-rested pet is a happy pet! Let Buddy nap when energy is low. 💤</p>
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <a class="uk-accordion-title" href="#">🛁 Bath Time</a>
+                        <div class="uk-accordion-content">
+                            <p>Baths increase happiness by 20%! Keep Buddy clean and fresh. A clean pet is a confident pet! 🧼✨</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- END UIKIT COMPONENT #4 -->
+        
+        
+        
+        <footer class="uk-text-center uk-margin-top" style="padding: 30px;">
+            <p style="color: #ff69b4; font-size: 18px; font-weight: bold;">Made with 💕 using UIKit | Take good care of Buddy! ✨</p>
+        </footer>
+        
+    </div>
+
+    <!-- UIKit JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+    
+    <script>
+        
+        let happiness = 75;
+        let hunger = 60;
+        let energy = 40;
+        
+        
+        function updateStats() {
+            
+            happiness = Math.max(0, Math.min(100, happiness));
+            hunger = Math.max(0, Math.min(100, hunger));
+            energy = Math.max(0, Math.min(100, energy));
+            
+            
+            document.getElementById('happinessBar').style.width = happiness + '%';
+            document.getElementById('hungerBar').style.width = hunger + '%';
+            document.getElementById('energyBar').style.width = energy + '%';
+            
+            
+            document.getElementById('happinessValue').textContent = happiness;
+            document.getElementById('hungerValue').textContent = hunger;
+            document.getElementById('energyValue').textContent = energy;
+            
+            
+            updatePetMood();
+        }
+        
+
+        function updatePetMood() {
+            const petEmoji = document.getElementById('petEmoji');
+            
+            if (happiness >= 80) {
+                petEmoji.textContent = '🐕'; // Happy dog
+            } else if (happiness >= 50) {
+                petEmoji.textContent = '🐶'; // Normal dog
+            } else if (happiness >= 30) {
+                petEmoji.textContent = '🐕'; // Neutral
+            } else {
+                petEmoji.textContent = '😢'; // Sad
+            }
+            
+            
+            if (energy < 20) {
+                petEmoji.textContent = '😴';
+            }
+            
+            
+            if (hunger > 80) {
+                petEmoji.textContent = '🤤';
+            }
+        }
+        
+        
+        function feedPet() {
+            hunger -= 30;  
+            happiness += 15;  
+            updateStats();
+            UIkit.modal('#feed-modal').show();  
+        }
+        
+        
+        function playWithPet() {
+            happiness += 25;  
+            energy -= 20; 
+            updateStats();
+            UIkit.modal('#play-modal').show();
+        }
+        
+        
+        function petSleep() {
+            energy += 40;  
+            hunger += 10;  
+            updateStats();
+            UIkit.modal('#sleep-modal').show();
+        }
+        
+        
+        function bathPet() {
+            happiness += 20;  
+            updateStats();
+            UIkit.modal('#bath-modal').show();
+        }
+        
+        
+        updateStats();
+    </script>
+
+</body>
+</html>
